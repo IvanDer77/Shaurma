@@ -1,0 +1,119 @@
+{
+  "n_candidates": 2000,
+  "seed": 42,
+  "grade_exact_accuracy": 0.758,
+  "grade_within_one": 1.0,
+  "grade_kappa_quadratic": 0.87,
+  "grade_overestimated_share": 0.073,
+  "avg_attempts": 1.31,
+  "confusion_true_rows_assigned_cols": [
+    [
+      205,
+      30,
+      0,
+      0
+    ],
+    [
+      112,
+      453,
+      53,
+      0
+    ],
+    [
+      0,
+      143,
+      515,
+      63
+    ],
+    [
+      0,
+      0,
+      83,
+      343
+    ]
+  ],
+  "ingredient_profile_spearman": {
+    "sql_joins": 0.647,
+    "sql_aggregation": 0.763,
+    "edge_cases": 0.772,
+    "complexity": 0.671,
+    "code_reading": 0.754,
+    "sql_nulls": 0.744,
+    "sql_window": 0.617,
+    "ml_metrics": 0.6,
+    "data_prep": 0.554,
+    "state_mutability": 0.594,
+    "api_contracts": 0.505,
+    "debugging": 0.736,
+    "idempotency": 0.667,
+    "concurrency": 0.607,
+    "js_async": 0.73,
+    "array_methods": 0.59,
+    "js_types": 0.83,
+    "closures_scope": 0.721,
+    "state_immutability": 0.655
+  },
+  "ingredient_profile_spearman_mean": 0.671,
+  "retest_agreement": 0.748,
+  "retest_kappa_quadratic": 0.864,
+  "template_discrimination_rpb": {
+    "bug_pagination": 0.436,
+    "bug_idempotent_charge": 0.429,
+    "js_closures_loop": 0.396,
+    "js_promise_all": 0.386,
+    "bug_reducer_mutation": 0.378,
+    "bug_sql_null": 0.368,
+    "bug_async_foreach": 0.366,
+    "js_coercion": 0.363,
+    "js_event_loop": 0.361,
+    "js_immutability": 0.356,
+    "sql_window": 0.354,
+    "py_mutable_default": 0.351,
+    "py_window": 0.35,
+    "py_groupby": 0.349,
+    "py_ml_metrics": 0.348,
+    "js_string_basics": 0.341,
+    "py_count_dict": 0.34,
+    "py_slice_basics": 0.339,
+    "sql_where_basics": 0.332,
+    "sql_group_having": 0.33,
+    "js_keys_order": 0.329,
+    "py_recursion_calls": 0.328,
+    "py_binary_search": 0.327,
+    "py_data_leak": 0.319,
+    "bug_average": 0.319,
+    "js_filter_map": 0.316,
+    "sql_join_fanout": 0.314,
+    "js_nullish": 0.312,
+    "sql_left_join": 0.311,
+    "bug_unique": 0.306,
+    "js_array_chain": 0.304,
+    "py_asyncio_order": 0.301,
+    "js_this_binding": 0.274,
+    "py_idempotency": 0.253
+  },
+  "template_discrimination_mean": 0.341,
+  "exposure_max_share": 0.043,
+  "leak": {
+    "fixed_test_inflation_honest": 0.132,
+    "fixed_test_inflation_cheaters": 1.322,
+    "shaurma_inflation_honest": -0.102,
+    "shaurma_inflation_cheaters": -0.105,
+    "shaurma_cheaters_caught_by_canary": 0.915,
+    "shaurma_false_positive_honest": 0.013
+  },
+  "matching": {
+    "shaurma": {
+      "precision_at_10": 0.855,
+      "ndcg_at_10": 0.697
+    },
+    "bm25": {
+      "precision_at_10": 0.35,
+      "ndcg_at_10": 0.235
+    },
+    "random": {
+      "precision_at_10": 0.34,
+      "ndcg_at_10": 0.272
+    }
+  }
+}

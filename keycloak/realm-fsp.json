@@ -1,0 +1,36 @@
+{
+  "realm": "fsp",
+  "displayName": "ФСП ID (демо)",
+  "enabled": true,
+  "registrationAllowed": true,
+  "loginWithEmailAllowed": true,
+  "internationalizationEnabled": true,
+  "supportedLocales": ["ru"],
+  "defaultLocale": "ru",
+  "clients": [{
+    "clientId": "proof",
+    "name": "шаурматч_",
+    "enabled": true,
+    "publicClient": false,
+    "secret": "proof-dev-secret",
+    "redirectUris": ["http://localhost/*", "http://localhost:5173/*", "*"],
+    "webOrigins": ["+"],
+    "standardFlowEnabled": true,
+    "protocolMappers": [{
+      "name": "fsp_id",
+      "protocol": "openid-connect",
+      "protocolMapper": "oidc-usermodel-attribute-mapper",
+      "config": { "user.attribute": "fsp_id", "claim.name": "fsp_id", "jsonType.label": "String", "userinfo.token.claim": "true", "id.token.claim": "true", "access.token.claim": "true" }
+    }]
+  }],
+  "users": [{
+    "username": "fsp.demo",
+    "email": "fsp.demo@shaurmatch.demo",
+    "emailVerified": true,
+    "firstName": "Алексей",
+    "lastName": "Смирнов",
+    "enabled": true,
+    "attributes": { "fsp_id": ["FSP-000777"] },
+    "credentials": [{ "type": "password", "value": "shaurma2026", "temporary": false }]
+  }]
+}

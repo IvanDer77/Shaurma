@@ -1,0 +1,2 @@
+{ "name": "шаурматч_ — ИТ-найм наоборот", "short_name": "шаурматч", "start_url": "/", "display": "standalone",
+  "background_color": "#EDEDED", "theme_color": "#1B1C21", "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }] }

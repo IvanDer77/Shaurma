@@ -1,0 +1,24 @@
+# Вход через «ФСП ID» (Keycloak, OIDC). Запуск:
+#   docker compose -f docker-compose.yml -f docker-compose.keycloak.yml up -d --build
+# Демо-пользователь Keycloak: fsp.demo / shaurma2026
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    command: ["start-dev", "--import-realm"]
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin}
+      KC_HOSTNAME: ${KEYCLOAK_PUBLIC_URL:-http://localhost:8180}
+      KC_HOSTNAME_BACKCHANNEL_DYNAMIC: "true"
+      KC_HTTP_ENABLED: "true"
+    volumes: ["./keycloak:/opt/keycloak/data/import:ro"]
+    ports: ["${KEYCLOAK_PORT:-8180}:8080"]
+    restart: unless-stopped
+
+  backend:
+    environment:
+      KEYCLOAK_ISSUER: http://keycloak:8080/realms/fsp
+      KEYCLOAK_PUBLIC_ISSUER: ${KEYCLOAK_PUBLIC_URL:-http://localhost:8180}/realms/fsp
+      KEYCLOAK_CLIENT_ID: proof
+      KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET:-proof-dev-secret}
+    depends_on: [keycloak]

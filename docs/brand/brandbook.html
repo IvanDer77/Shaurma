@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>шаурматч_ — брендбук</title>
+<style>
+@font-face { font-family: "Onest"; src: url("fonts/Onest.ttf") format("truetype"); font-weight: 100 900; }
+@font-face { font-family: "JetBrains Mono"; src: url("fonts/JetBrainsMono.ttf") format("truetype"); font-weight: 100 800; }
+@font-face { font-family: "TDAText"; src: url("fonts/TDAText.ttf") format("truetype"); }
+:root {
+  --ink: #1B1C21; --ink-2: #4A4B53; --ink-3: #6B6C72; --paper: #EDEDED; --white: #FFFFFF;
+  --blue: #402FFF; --blue-soft: #E3E0FF; --blue-tint: #B9B4FF; --violet: #8C82FF; --deep: #0A006B;
+  --sauce: #FF8A1F; --sauce-ink: #A04A00; --sauce-bg: #FFF1E3; --green: #0E7A3E; --green-bg: #E3F5EA;
+  --red: #EC1D35; --gray-200: #D9D9D9; --gray-400: #9B9C9E;
+  --rule: 1.5px solid var(--ink); --hair: 1px solid var(--gray-200);
+  --sans: Onest, system-ui, sans-serif; --mono: "JetBrains Mono", Consolas, monospace; --pixel: TDAText, var(--mono);
+}
+* { box-sizing: border-box; }
+html { background: var(--paper); }
+body { margin: 0; font: 400 15px/1.55 var(--sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1120px; width: 100%; margin: 0 auto; padding: 0 32px; }
+section { padding: 64px 0; border-top: var(--rule); break-inside: avoid-page; }
+h1, h2, h3 { font-family: var(--mono); font-weight: 800; letter-spacing: -.04em; margin: 0; }
+h2 { font-size: 40px; line-height: 1.05; }
+h3 { font-size: 18px; letter-spacing: -.02em; }
+p { margin: 0; max-width: 720px; }
+.num { font: 700 13px var(--mono); color: var(--ink-3); margin-bottom: 14px; display: block; }
+.lead { font-size: 18px; line-height: 1.55; max-width: 760px; margin-top: 18px; }
+.muted { color: var(--ink-2); }
+.small { font-size: 13px; }
+.mono { font-family: var(--mono); }
+.grid { display: grid; gap: 24px; }
+.g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.box { border: var(--rule); background: var(--white); }
+.cap { font-size: 13px; color: var(--ink-2); margin-top: 8px; }
+.tile { padding: 28px; display: flex; align-items: center; justify-content: center; min-height: 180px; }
+.rows > div { display: flex; gap: 20px; padding: 14px 0; border-bottom: var(--hair); align-items: baseline; }
+.rows { border-top: var(--rule); }
+.no { color: var(--red); font-weight: 700; }
+.yes { color: var(--green); font-weight: 700; }
+/* обложка */
+.cover { min-height: 100vh; background: var(--blue); color: #fff; display: flex; flex-direction: column; justify-content: space-between; padding: 40px 0; }
+.cover .meta { display: flex; justify-content: space-between; font: 600 13px var(--mono); color: #E3E0FF; }
+.cover img { width: min(720px, 90%); display: block; }
+.cover p { color: #E3E0FF; font-size: 20px; margin-top: 28px; max-width: 640px; }
+/* цвета */
+.sw { border: var(--rule); background: var(--white); }
+.sw .chip { height: 120px; }
+.sw .info { padding: 14px 16px; display: grid; gap: 2px; }
+.sw b { font-size: 15px; }
+.bar { display: flex; height: 44px; border: var(--rule); margin-top: 20px; }
+.bar span { display: block; }
+/* типографика */
+.spec { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 22px 0; border-bottom: var(--hair); align-items: baseline; }
+/* компоненты */
+.btn { height: 46px; padding: 0 22px; border: 1.5px solid transparent; font: 700 14px var(--sans); display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary { background: var(--blue); color: #fff; }
+.btn-dark { background: var(--blue-soft); color: var(--deep); }
+.btn-outline { border-color: var(--ink); background: transparent; color: var(--ink); }
+.btn-dashed { border: 1.5px dashed var(--ink); background: transparent; color: var(--ink); }
+.st { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; }
+.st::before { content: ""; width: 10px; height: 10px; background: currentColor; }
+.code { font: 700 15px var(--mono); }
+.input { border: 0; border-bottom: var(--rule); padding: 10px 2px; font: 400 16px var(--sans); width: 100%; background: transparent; }
+.ibar { height: 6px; background: var(--gray-200); position: relative; }
+.ibar i { position: absolute; top: 0; bottom: 0; left: 0; }
+.mark { display: inline-block; width: 10px; height: 10px; margin-right: 8px; vertical-align: 0; }
+footer { padding: 40px 0 64px; border-top: var(--rule); font-size: 13px; color: var(--ink-2); }
+@media (max-width: 760px) { .g2, .g3, .g4 { grid-template-columns: minmax(0, 1fr); } .spec { grid-template-columns: 1fr; gap: 6px; } h2 { font-size: 30px; } .wrap { padding: 0 16px; } }
+
+
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="wrap meta"><span>Брендбук, версия 1.0</span><span>октябрь 2026</span></div>
+  <div class="wrap">
+    <img src="logo-white.svg" alt="шаурматч_">
+    <p>ИТ-найм наоборот: компании находят и приглашают кандидатов, чей грейд подтверждён тестом, а не резюме.</p>
+  </div>
+  <div class="wrap meta"><span>хакатон «Лидеры цифровой трансформации 2026», спецтрек ФСП</span><img src="fsp-star-white.svg" alt="" style="width:28px"></div>
+</div>
+
+<div class="wrap">
+
+<section>
+  <span class="num">01</span>
+  <h2>Идея</h2>
+  <p class="lead">«Шаурматч» — шаурма и матч. Шаурму заворачивают при вас и по вашему заказу; так же наш тест собирает каждому кандидату свой вариант задач, а подбор сводит компанию и человека по подтверждённым навыкам.</p>
+  <div class="grid g3" style="margin-top:36px">
+    <div><h3>Честно</h3><p class="muted small" style="margin-top:8px">Категорию даёт только тест. Зарплата в приглашении — всегда вилка «от–до». Отказ — без понижения грейда.</p></div>
+    <div><h3>Конкретно</h3><p class="muted small" style="margin-top:8px">Цифры вместо эпитетов: код категории, место в выдаче, рейтинг навыка, шанс, что кандидат примет приглашение.</p></div>
+    <div><h3>Спокойно</h3><p class="muted small" style="margin-top:8px">Плоская вёрстка, прямые углы, тонкие линии. Никаких «вау»-эффектов — интерфейс уступает место данным.</p></div>
+  </div>
+  <p class="muted" style="margin-top:28px">Знак подчёркивания «_» в имени — курсор и соус одновременно: продукт всё время дорабатывается и учится («Маринад»). Это единственный тёплый акцент бренда.</p>
+</section>
+
+<section>
+  <span class="num">02</span>
+  <h2>Логотип</h2>
+  <p class="lead">Логотип — слово «шаурматч» строчными в JetBrains Mono ExtraBold с трекингом −0.04em и оранжевым курсором «_». Надпись переведена в кривые: используйте файлы, не набирайте логотип шрифтом.</p>
+  <div class="grid g2" style="margin-top:36px">
+    <div><div class="box tile" style="background:var(--paper)"><img src="logo.svg" alt="" style="width:80%"></div><div class="cap">Основной — на светло-сером и белом. <span class="mono">logo.svg</span></div></div>
+    <div><div class="box tile" style="background:var(--deep)"><img src="logo-white.svg" alt="" style="width:80%"></div><div class="cap">Инверсия — на тёмно-синем. <span class="mono">logo-white.svg</span></div></div>
+    <div><div class="box tile" style="background:var(--blue)"><img src="logo-white.svg" alt="" style="width:80%"></div><div class="cap">На синем ФСП — только белая надпись. <span class="mono">logo-on-blue.svg</span></div></div>
+    <div><div class="box tile" style="background:var(--paper)"><img src="mark.svg" alt="" style="width:120px"></div><div class="cap">Знак — пиксельная «ш» и курсор. Для иконки приложения и favicon. <span class="mono">mark.svg</span></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:36px">
+    <div><h3>Охранное поле</h3><p class="muted small" style="margin-top:8px">Со всех сторон — не меньше высоты строчной «ш». В файлах <span class="mono">logo-on-*.svg</span> поле уже заложено.</p></div>
+    <div><h3>Минимальный размер</h3><p class="muted small" style="margin-top:8px">Надпись — от 96 px (24 мм) в ширину. Знак — от 16 px. Мельче используйте только знак.</p></div>
+    <div><h3>Курсор</h3><p class="muted small" style="margin-top:8px">Всегда <span class="mono">#FF8A1F</span>, в любой версии. В интерфейсе он мигает раз в секунду; при «меньше движения» — статичен.</p></div>
+  </div>
+  <h3 style="margin-top:40px">Нельзя</h3>
+  <div class="rows" style="margin-top:12px">
+    <div><span class="no">×</span><span>Писать с заглавной, капсом или латиницей: «Шаурматч», «ШАУРМАТЧ», «shaurmatch».</span></div>
+    <div><span class="no">×</span><span>Убирать курсор, менять его цвет или ставить вместо него другой знак.</span></div>
+    <div><span class="no">×</span><span>Растягивать, наклонять, добавлять тени, обводки и градиенты.</span></div>
+    <div><span class="no">×</span><span>Ставить на фотографии и пёстрые фоны — только бумага, белый, чернила или синий.</span></div>
+    <div><span class="no">×</span><span>Сочетать со знаком ФСП в одну композицию без разделителя (см. раздел 07).</span></div>
+  </div>
+</section>
+
+<section>
+  <span class="num">03</span>
+  <h2>Цвет</h2>
+  <p class="lead">Основа — фирменный синий ФСП на светло-сером и белом. Чёрных заливок нет: тёмный цвет — только для текста и тонких линий. Оранжевый «соус» — единственный тёплый цвет; он отмечает новое и главное, но не заливает большие площади.</p>
+  <div class="grid g4" style="margin-top:36px">
+    <div class="sw"><div class="chip" style="background:var(--ink)"></div><div class="info"><b>Чернила</b><span class="mono small">#1B1C21</span><span class="small muted">только текст и линии</span></div></div>
+    <div class="sw"><div class="chip" style="background:var(--paper)"></div><div class="info"><b>Бумага</b><span class="mono small">#EDEDED</span><span class="small muted">фон страниц</span></div></div>
+    <div class="sw"><div class="chip" style="background:var(--blue)"></div><div class="info"><b>Синий ФСП</b><span class="mono small">#402FFF</span><span class="small muted">главное действие, выбранное, данные</span></div></div>
+    <div class="sw"><div class="chip" style="background:var(--sauce)"></div><div class="info"><b>Соус</b><span class="mono small">#FF8A1F</span><span class="small muted">курсор и «новое»</span></div></div>
+  </div>
+  <div class="grid g4" style="margin-top:24px">
+    <div class="sw"><div class="chip" style="background:var(--white)"></div><div class="info"><b>Белый</b><span class="mono small">#FFFFFF</span><span class="small muted">карточки, поля ввода</span></div></div>
+    <div class="sw"><div class="chip" style="background:var(--violet)"></div><div class="info"><b>Фиалка</b><span class="mono small">#8C82FF</span><span class="small muted">статус «просмотрено», вторичные данные</span></div></div>
+    <div class="sw"><div class="chip" style="background:var(--green)"></div><div class="info"><b>Зелёный</b><span class="mono small">#0E7A3E</span><span class="small muted">«принято», «подтверждено тестом»</span></div></div>
+    <div class="sw"><div class="chip" style="background:var(--red)"></div><div class="info"><b>Красный ФСП</b><span class="mono small">#EC1D35</span><span class="small muted">только крупно; ошибки — <span class="mono">#C4001D</span></span></div></div>
+  </div>
+  <div class="bar" aria-label="Пропорции цвета"><span style="flex:55;background:var(--paper)"></span><span style="flex:20;background:var(--white)"></span><span style="flex:15;background:var(--blue)"></span><span style="flex:7;background:var(--ink)"></span><span style="flex:3;background:var(--sauce)"></span></div>
+  <p class="cap">Пропорции на экране: бумага 55, белый 20, синий 15, чернила 7 (текст), соус 3.</p>
+  <div class="rows" style="margin-top:28px">
+    <div><span class="yes">✓</span><span>Текст на бумаге и белом — только чернила или <span class="mono">#4A4B53</span> (контраст ≥ 7:1 и ≥ 7.9:1).</span></div>
+    <div><span class="yes">✓</span><span>Оранжевый текст на светлом фоне — тёмный вариант <span class="mono">#A04A00</span>; чистый <span class="mono">#FF8A1F</span> — только на чернилах.</span></div>
+    <div><span class="yes">✓</span><span>Статус никогда не передаётся одним цветом: рядом всегда квадратный маркер и слово.</span></div>
+  </div>
+</section>
+
+<section>
+  <span class="num">04</span>
+  <h2>Типографика</h2>
+  <p class="lead">Три шрифта, у каждого своя работа, у всех полная кириллица. Onest и JetBrains Mono распространяются по открытой лицензии SIL OFL, TDAText — фирменный шрифт ФСП из брендбука федерации.</p>
+  <div style="margin-top:28px;border-top:var(--rule)">
+    <div class="spec"><span class="small muted">JetBrains Mono 800<br>заголовки, суммы, коды</span><span style="font:800 56px/1 var(--mono);letter-spacing:-.04em">Паспорт навыков</span></div>
+    <div class="spec"><span class="small muted">TDAText<br>крупные коды и числа</span><span style="font:400 72px/1 var(--pixel);color:var(--blue)">BE<span style="display:inline-block;width:.16em;height:.16em;border-radius:50%;background:var(--blue);margin:0 .2em;vertical-align:middle"></span>SEN 90</span></div>
+    <div class="spec"><span class="small muted">Onest 400–700<br>весь остальной текст</span><span style="font-size:18px;line-height:1.55;max-width:620px">Компания видит категорию и подтверждённые навыки. Email, телефон и Telegram откроются ей, только когда вы примете приглашение.</span></div>
+    <div class="spec"><span class="small muted">JetBrains Mono 700<br>деньги</span><span style="font:700 32px var(--mono)">350 000 – 420 000 ₽</span></div>
+  </div>
+  <div class="grid g4" style="margin-top:28px">
+    <div><b class="mono">72 / 800</b><p class="small muted">заголовок страницы, трекинг −0.04em</p></div>
+    <div><b class="mono">21 / 800</b><p class="small muted">раздел страницы</p></div>
+    <div><b class="mono">15 / 400</b><p class="small muted">основной текст, интерлиньяж 1.55</p></div>
+    <div><b class="mono">13 / 600</b><p class="small muted">подписи полей и мета-данные</p></div>
+  </div>
+  <p class="muted small" style="margin-top:20px">В пиксельном TDAText нет точки по центру «·» — в коде категории она рисуется отдельным кружком. Кавычки — «ёлочки», тире — длинное с пробелами, диапазон — короткое без пробелов: 2–5 лет.</p>
+</section>
+
+<section>
+  <span class="num">05</span>
+  <h2>Интерфейс</h2>
+  <p class="lead">Плоско и строго: прямые углы, линии 1.5 px вместо теней и карточек, данные — в строках и плитках. Единственная скруглённая форма — переключатель и кольцо совпадения.</p>
+  <div class="box" style="margin-top:28px;height:160px;background-color:var(--paper);background-image:linear-gradient(rgba(27,28,33,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(27,28,33,.07) 1px,transparent 1px);background-size:24px 24px"></div>
+  <p class="cap">Фон страниц — ровная сетка из квадратов 24 px тонкими светлыми линиями. На синей панели — те же линии белым. В режимах доступности сетка отключается.</p>
+  <div class="grid g2" style="margin-top:36px">
+    <div class="box" style="padding:28px;display:grid;gap:18px">
+      <h3>Кнопки</h3>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><span class="btn btn-primary">Пригласить</span><span class="btn btn-dark">Решить</span><span class="btn btn-outline">Скачать PDF</span><span class="btn btn-dashed">+ Новая потребность</span></div>
+      <p class="small muted">Синяя — одно главное действие на экране. Светло-синяя — второе по важности и выбранная вкладка. Контурная — остальное. Пунктир — «создать новое».</p>
+    </div>
+    <div class="box" style="padding:28px;display:grid;gap:18px">
+      <h3>Статусы приглашений</h3>
+      <div style="display:flex;gap:18px;flex-wrap:wrap"><span class="st" style="color:var(--blue)">отправлено</span><span class="st" style="color:var(--violet)">просмотрено</span><span class="st" style="color:var(--green)">принято</span><span class="st" style="color:var(--gray-400)">отклонено</span></div>
+      <p class="small muted">Порядок всегда один: отправлено, просмотрено, затем принято или отклонено. Кандидат видит «новое» вместо «отправлено».</p>
+    </div>
+    <div class="box" style="padding:28px;display:grid;gap:18px">
+      <h3>Поля</h3>
+      <label class="small" style="font-weight:600">Хочу от, ₽ в месяц<input class="input mono" style="font:700 20px var(--mono)" value="320 000" readonly></label>
+      <p class="small muted">Поле — подчёркивание, подпись сверху, подсказка снизу. Многострочный текст — в рамке на белом.</p>
+    </div>
+    <div class="box" style="padding:28px;display:grid;gap:14px">
+      <h3>Навык (ингредиент)</h3>
+      <div style="display:flex;justify-content:space-between;font-size:14px"><span>Идемпотентность и повторы</span><b class="mono">1890</b></div>
+      <div class="ibar"><i style="width:55%;background:var(--blue)"></i><i style="left:55%;width:17%;background:var(--blue-tint)"></i></div>
+      <p class="small muted">Сплошная часть — подтверждённый уровень (μ − 2·RD), светлая — неопределённость. Чем больше практики, тем короче светлая часть.</p>
+    </div>
+  </div>
+  <div style="background:var(--white);border:var(--rule);margin-top:24px;display:grid;grid-template-columns:2fr 1fr 1fr">
+    <div style="padding:24px"><span class="small muted">ваша категория</span><div style="font:400 64px/1.1 var(--pixel);color:var(--blue);margin-top:10px">BE<span style="display:inline-block;width:.16em;height:.16em;border-radius:50%;background:var(--blue);margin:0 .2em;vertical-align:middle"></span>SEN</div></div>
+    <div style="padding:24px;border-left:var(--hair)"><span class="small muted">место</span><div style="font:400 44px/1.4 var(--pixel)">#7</div></div>
+    <div style="padding:24px;border-left:var(--hair)"><span class="small muted">компаний ищут</span><div style="font:400 44px/1.4 var(--pixel);color:var(--violet)">3</div></div>
+  </div>
+  <p class="cap">Плитки с крупными цифрами — для главного на экране: белые, в рамке, цифры пиксельным шрифтом. Не больше одного ряда плиток на странице.</p>
+</section>
+
+<section>
+  <span class="num">06</span>
+  <h2>Голос</h2>
+  <p class="lead">Говорим на «вы», коротко и по делу. Объясняем, что произойдёт после нажатия, и никогда не стыдим.</p>
+  <div class="grid g2" style="margin-top:28px">
+    <div class="rows">
+      <div><span class="yes">✓</span><span>«Пока не подтверждается. Это не понижение — можно сдать тест на уровень ниже».</span></div>
+      <div><span class="yes">✓</span><span>«Контакты откроются компании, только когда вы примете приглашение».</span></div>
+      <div><span class="yes">✓</span><span>«Истории ФСП нет — квалификацию подтверждают тесты. На позицию в выдаче это не влияет».</span></div>
+    </div>
+    <div class="rows">
+      <div><span class="no">×</span><span>«Вы провалили тест на Senior».</span></div>
+      <div><span class="no">×</span><span>«Уважаемый соискатель! Ваша заявка успешно принята в обработку».</span></div>
+      <div><span class="no">×</span><span>«Оффер», «скиллы», «ачивки» — пишем «приглашение», «навыки», «достижения».</span></div>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:24px">Словарь метода «ШАУРМА» — лаваш, начинка, рецепт, вертел, «Слепая дегустация», «Честный ценник», «Маринад» — используем как названия механик, а не как шутки. В деловых текстах рядом даём обычное слово: «рецепт навыков», «рейтинг навыка».</p>
+</section>
+
+<section>
+  <span class="num">07</span>
+  <h2>Вместе с ФСП</h2>
+  <p class="lead">Платформа — партнёрский продукт спецтрека ФСП. Знак ФСП ставим только официальными файлами и только рядом с данными федерации.</p>
+  <div class="box" style="margin-top:28px;padding:36px;display:flex;align-items:center;gap:36px;flex-wrap:wrap;background:var(--white)">
+    <img src="logo.svg" alt="шаурматч_" style="height:44px">
+    <span style="width:1.5px;height:56px;background:var(--ink)"></span>
+    <img src="fsp-logo-black.svg" alt="ФСП" style="height:52px">
+  </div>
+  <p class="cap">Кобрендинг: логотипы одной высоты по строчным, между ними вертикальная линия 1.5 px и поле не меньше двух высот «ш».</p>
+  <div class="grid g2" style="margin-top:28px">
+    <div>
+      <h3>Звезда ФСП</h3>
+      <p class="muted small" style="margin-top:8px">Отмечает только сведения из федерации: блок «Достижения ФСП», отметку «ФСП × 3» в выдаче, вход через ФСП ID. Чёрная — на светлом, белая — на синем.</p>
+      <div style="display:flex;gap:16px;margin-top:14px"><img src="fsp-star-black.svg" alt="" style="height:36px"><span style="background:var(--blue);padding:6px"><img src="fsp-star-white.svg" alt="" style="height:24px;display:block"></span></div>
+    </div>
+    <div>
+      <h3>Цвета дисциплин</h3>
+      <p class="muted small" style="margin-top:8px">Из брендбука ФСП. Только маркер рядом с названием дисциплины, никогда — цвет текста или фона.</p>
+      <div style="display:grid;gap:6px;margin-top:14px;font-size:14px">
+        <span><i class="mark" style="background:#8C3BFF"></i>Продуктовое программирование</span>
+        <span><i class="mark" style="background:#402FFF"></i>Алгоритмическое программирование</span>
+        <span><i class="mark" style="background:#1FB5A8"></i>Программирование БАС</span>
+        <span><i class="mark" style="background:#F5C400"></i>Программирование робототехники</span>
+        <span><i class="mark" style="background:#0E7A3E"></i>Информационная безопасность</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="num">08</span>
+  <h2>Графики и данные</h2>
+  <p class="lead">Графики рисуем теми же цветами: «до» — серый <span class="mono">#9B9C9E</span>, «после» и «мы» — синий, третья серия — соус. Без рамок, без заливок фона, подписи — чернилами, заголовок слева.</p>
+  <div class="grid g2" style="margin-top:28px">
+    <div class="box" style="padding:12px"><img src="../validation/leak.png" alt="" style="width:100%;display:block"></div>
+    <div class="box" style="padding:12px"><img src="../validation/matching.png" alt="" style="width:100%;display:block"></div>
+  </div>
+  <div class="rows" style="margin-top:28px">
+    <div><span class="no">×</span><span>Иллюстрации людей, 3D, стоковые фото, эмодзи в интерфейсе.</span></div>
+    <div><span class="no">×</span><span>Тени, скругления карточек, градиенты, стекло и размытие.</span></div>
+    <div><span class="no">×</span><span>Чёрные плашки и панели. Большие цветные площади — только синий ФСП.</span></div>
+    <div><span class="no">×</span><span>Стрелки в кнопках и ссылках, точки-разделители между словами. Перечисляем через запятую.</span></div>
+    <div><span class="no">×</span><span>Больше одного синего действия и больше одного оранжевого акцента на экране.</span></div>
+  </div>
+</section>
+
+<section>
+  <span class="num">09</span>
+  <h2>Файлы</h2>
+  <div class="rows" style="margin-top:20px">
+    <div><span class="mono" style="width:220px">logo.svg</span><span class="muted">надпись, чернила, без фона</span></div>
+    <div><span class="mono" style="width:220px">logo-white.svg</span><span class="muted">надпись, белая, без фона</span></div>
+    <div><span class="mono" style="width:220px">logo-on-paper.svg</span><span class="muted">на бумаге, с охранным полем</span></div>
+    <div><span class="mono" style="width:220px">logo-on-ink.svg</span><span class="muted">на чернилах, с охранным полем</span></div>
+    <div><span class="mono" style="width:220px">logo-on-blue.svg</span><span class="muted">на синем ФСП, с охранным полем</span></div>
+    <div><span class="mono" style="width:220px">mark.svg</span><span class="muted">знак 512×512, иконка и favicon</span></div>
+    <div><span class="mono" style="width:220px">fsp-*.svg</span><span class="muted">официальные знаки ФСП из архива федерации</span></div>
+    <div><span class="mono" style="width:220px">fonts/</span><span class="muted">Onest и JetBrains Mono (SIL OFL), TDAText (фирменный шрифт ФСП)</span></div>
+  </div>
+  <p class="muted small" style="margin-top:20px">Токены дизайна в коде — <span class="mono">frontend/src/styles.css</span>, раздел <span class="mono">:root</span>. Логотипы пересобираются скриптом из шрифта, поэтому всегда совпадают с интерфейсом.</p>
+</section>
+
+</div>
+<footer><div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap"><span>шаурматч_, брендбук 1.0, октябрь 2026</span><span>Название и метод «ШАУРМА» — команда проекта. Знаки ФСП — собственность Федерации спортивного программирования.</span></div></footer>
+</body>
+</html>

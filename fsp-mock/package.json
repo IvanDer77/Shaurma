@@ -1,0 +1,9 @@
+{
+  "name": "proof-fsp-mock",
+  "version": "1.0.0",
+  "description": "Мок-сервис реестра Федерации спортивного программирования (структура данных предложена командой)",
+  "type": "module",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "express": "^5.2.1" }
+}

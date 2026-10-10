@@ -1,0 +1,27 @@
+# зависимости и сборка
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.venv/
+.vscode/
+.idea/
+
+# секреты
+.env
+*.env
+!.env.example
+
+# генерируются скриптом frontend/scripts/sync-assets.mjs
+frontend/public/concept/
+frontend/public/validation/
+frontend/public/training/
+frontend/public/brand/brandbook.html
+frontend/public/brand/*.pdf
+docs/_build_docs.html
+
+# материалы организаторов и черновики
+/ФСП/
+/описание.txt
+/*.pdf
+/дополнительная информация/
