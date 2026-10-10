@@ -61,11 +61,11 @@ def charts(m: dict):
         wc, kc = window(d["control_trace"], d["control_ts"])
         wv, kv = window(d["trace"], d["trace_ts"])
         a.plot([x for x, _ in wc], [y for _, y in wc], color=BASE, lw=1.2, label=f"обычная начинка")
-        a.plot([x for x, _ in wv], [y for _, y in wv], color=LEARN, lw=1.6, label="начинка с вирусным разбором")
+        a.plot([x for x, _ in wv], [y for _, y in wv], color=LEARN, lw=1.6, label="начинка, разбор которой распространился")
         a.axhline(d["h"], color=INK, lw=1, ls="--")
         a.text(-300, d["h"] + 0.4, f"порог тревоги h = {d['h']:g}", color=INK, fontsize=9)
         a.axvline(0, color=MUTED, lw=1, ls=":")
-        a.text(-8, d["h"] * 1.45, "разбор\nзавирусился", color=MUTED, fontsize=9, ha="right")
+        a.text(-8, d["h"] * 1.45, "разбор\nраспространился", color=MUTED, fontsize=9, ha="right")
         if d.get("detected"):
             n = d["detected"]["responses_since_viral"]
             a.annotate(f"тревога через\n{n} ответов", xy=(n, d["h"]), xytext=(n + 110, d["h"] * 0.35), fontsize=9.5, color=INK,
@@ -86,7 +86,7 @@ def charts(m: dict):
     fig, ax2 = plt.subplots(1, 2, figsize=(10, 4.6), sharey=True)
     lo = min(min(p["truth"], p["expert"], p["learned"]) for p in pts) - 0.1
     hi = max(max(p["truth"], p["expert"], p["learned"]) for p in pts) + 0.1
-    for a, key, col, title in ((ax2[0], "expert", BASE, "Эксперт «на глаз»"), (ax2[1], "learned", LEARN, "Маринад (по ответам)")):
+    for a, key, col, title in ((ax2[0], "expert", BASE, "Экспертная оценка"), (ax2[1], "learned", LEARN, "Маринад (по ответам)")):
         a.plot([lo, hi], [lo, hi], color=MUTED, lw=1, ls="--")
         a.scatter([p["truth"] for p in pts], [p[key] for p in pts], s=34, color=col, edgecolor="white", linewidth=1.2)
         tv, ev = np.array([p["truth"] for p in pts]), np.array([p[key] for p in pts])
@@ -181,10 +181,10 @@ def report(m: dict):
                  f"**{ve['by_month'][-1]['learned']:+.2f}**.") if ve and ve.get("by_month") else ""
     curve = L["learning_curve"]
     ck = sorted(curve, key=lambda k: int(k))
-    md = f"""# «Маринад»: как шаурматч_ учится на собственных данных
+    md = f"""# «Маринад»: отчёт симуляции обучения на данных платформы
 
-Шаурма вкуснее, чем дольше маринуется. шаурматч_ точнее, чем больше им пользуются: три модели
-дообучаются на том, что люди и так делают в продукте. Никаких отдельных разметчиков и внешних API.
+Три модели платформы дообучаются на действиях пользователей в продукте. Отдельная разметка и внешние API
+для этого не нужны.
 
 | Действие в продукте | Чему учит | Модель |
 |---|---|---|
@@ -235,7 +235,7 @@ def report(m: dict):
 ## 3. Детектор «чёрствого лаваша»
 
 Банк шаблонов ШАУРМЫ открыт, и ответы не утекают: варианты уникальны. Но может «утечь приём»:
-разбор трюка начинки завирусился, и задание перестаёт различать сильных и слабых. В {d['viral_month']}-м месяце
+разбор приёма начинки распространился, и задание перестаёт различать сильных и слабых. В {d['viral_month']}-м месяце
 так случилось с начинкой «{viral_title}» (`{d['viral_key']}`): 70% новых кандидатов видели разбор.
 
 Для каждого ответа считается остаток «ответ минус предсказание текущей модели». У любой начинки есть постоянное

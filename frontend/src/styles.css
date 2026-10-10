@@ -257,7 +257,7 @@ img { max-width: 100%; }
 .code-block .ln::before { counter-increment: line; content: counter(line); display: inline-block; width: 1.8em; margin-right: 18px; color: var(--gray-400); text-align: right; }
 .answers { border-top: var(--rule); }
 .answer { width: 100%; display: flex; gap: 24px; align-items: flex-start; padding: 16px 12px; border: 0; border-bottom: var(--rule); background: transparent; text-align: left; cursor: pointer; font: 500 15px/1.5 var(--mono); color: var(--ink); white-space: pre-wrap; }
-.answer:hover:not(:disabled) { background: var(--white); }
+.answer:hover:not(:disabled):not([aria-checked="true"]) { background: var(--white); }
 .answer .key { font-weight: 700; width: 14px; flex-shrink: 0; }
 .answer[aria-checked="true"] { background: var(--blue); color: #fff; }
 .answer.right { background: var(--green-bg); }

@@ -4,7 +4,7 @@
 Порядок разделов повторяет перечень п. 3.4 ТЗ. Диаграммы mermaid рендерятся в браузере.
 
 Запуск (нужны пакеты markdown и playwright с Chromium/Edge):
-    python scripts/build_docs_pdf.py            → docs/шаурматч_документация.pdf
+    python scripts/build_docs_pdf.py            (результат: docs/шаурматч_документация.pdf)
 """
 import asyncio
 import datetime as dt
@@ -24,8 +24,8 @@ SECTIONS = [
     ("Функциональная и компонентная архитектура", DOCS / "АРХИТЕКТУРА.md"),
     ("Механика тестирования и подбора: метод «ШАУРМА»", DOCS / "МЕТОД ШАУРМА.md"),
     ("Валидация метода: процедура и результаты", DOCS / "validation" / "report.md"),
-    ("«Маринад»: обучение на данных платформы", DOCS / "МАРИНАД.md"),
-    ("«Маринад»: отчёт симуляции", DOCS / "training" / "report.md"),
+    ("Обучение моделей на данных платформы («Маринад»)", DOCS / "МАРИНАД.md"),
+    ("Отчёт симуляции обучения", DOCS / "training" / "report.md"),
     ("Интеграция с реестром ФСП", DOCS / "ИНТЕГРАЦИЯ ФСП.md"),
     ("Описание API", None),
     ("Библиотеки и компоненты", DOCS / "БИБЛИОТЕКИ.md"),
@@ -33,8 +33,26 @@ SECTIONS = [
 ]
 
 
+# Требования п. 3.4 ТЗ к составу документации и разделы, которые их закрывают
+TZ_34 = [
+    ("Функциональная и компонентная архитектура решения", "2"),
+    ("Механика тестирования кандидатов с обоснованием устойчивости к распространению заданий", "3 (пункты 5–7 и 11), 4"),
+    ("Механика подбора и логика категоризации кандидатов", "3 (пункты 7–9)"),
+    ("Собственная процедура валидации решения и её результаты", "4, 5, 6"),
+    ("Схема предполагаемой интеграции с реестром ФСП", "7"),
+    ("Описание API", "8"),
+    ("Используемые библиотеки и компоненты с указанием версий", "9"),
+    ("Пошаговая инструкция по сборке, развёртыванию и локальному запуску", "10, 1"),
+]
+DEMO_URL = "http://62.113.107.39:8200"
+REPO_URL = "https://github.com/IvanDer77/Shaurma"
+
+
 def md_to_html(path: Path) -> str:
     text = path.read_text(encoding="utf-8")
+    if path.name == "README.md":
+        # таблица ссылок на файлы репозитория в PDF не нужна: её заменяет содержание
+        text = re.sub(r"## Документация\n.*?(?=\n## )", "", text, flags=re.S)
     text = re.sub(r"^# .*\n", "", text, count=1)                    # заголовок раздела даём свой
     # ```mermaid → <div class="mermaid">
     text = re.sub(r"```mermaid\n(.*?)```", lambda m: f'<div class="mermaid">{html.escape(m.group(1))}</div>', text, flags=re.S)
@@ -78,6 +96,7 @@ body { font-family: Onest, 'Segoe UI', Arial, sans-serif; color: #1B1C21; font-s
 h1, h2, h3 { font-family: 'JetBrains Mono', Consolas, monospace; font-weight: 800; letter-spacing: -.03em; }
 h1 { font-size: 22pt; margin: 0 0 10pt; page-break-before: always; border-bottom: 1.5px solid #1B1C21; padding-bottom: 6pt; }
 h1.first { page-break-before: avoid; }
+h1.plain { border-bottom: 1.5px solid #1B1C21; }
 h2 { font-size: 14pt; margin-top: 18pt; }
 h3 { font-size: 11.5pt; margin-top: 14pt; }
 a { color: #402FFF; }
@@ -92,9 +111,13 @@ th { background: #EDEDED; }
 img { max-width: 100%; margin: 6pt 0; }
 .muted { color: #6B6C72; font-size: 8.5pt; }
 .cover { height: 250mm; display: flex; flex-direction: column; justify-content: center; }
+.cover .st { font-size: 13pt; line-height: 1.45; max-width: 150mm; color: #4A4B53; }
+.cover table.meta { width: auto; margin-top: 22pt; font-size: 10pt; }
+.cover table.meta td { border: 0; border-top: 1px solid #D9D9D9; padding: 5pt 14pt 5pt 0; }
+.cover table.meta td:first-child { color: #6B6C72; white-space: nowrap; }
 .cover .brand { font: 800 44pt 'JetBrains Mono', monospace; letter-spacing: -.04em; color: #1B1C21; }
 .cover .brand span { color: #FF8A1F; }
-.cover .t { font-size: 20pt; font-weight: 700; margin: 12pt 0 6pt; }
+.cover .t { font: 800 22pt 'JetBrains Mono', monospace; letter-spacing: -.03em; margin: 14pt 0 8pt; }
 .toc li { margin: 3pt 0; }
 .mermaid { text-align: center; margin: 8pt 0; }
 """
@@ -102,11 +125,24 @@ img { max-width: 100%; margin: 6pt 0; }
 
 async def main():
     from playwright.async_api import async_playwright
+    toc = "".join(f"<li>{html.escape(t)}</li>" for t, _ in SECTIONS)
+    tz = "".join(f"<tr><td>{html.escape(req)}</td><td>{sec}</td></tr>" for req, sec in TZ_34)
     parts = [f"""<div class="cover"><div class="brand">шаурматч<span>_</span></div>
-      <div class="t">Платформа обратного ИТ-найма на подтверждённых навыках</div>
-      <div>Сопроводительная документация · хакатон «Лидеры цифровой трансформации 2026», спецтрек ФСП</div>
-      <div class="muted" style="margin-top:16pt">Сборка {dt.date.today():%d.%m.%Y} · источник — docs/*.md и docs/openapi.json в репозитории</div>
-      <h2 style="margin-top:28pt">Содержание</h2><ol class="toc">{''.join(f'<li>{html.escape(t)}</li>' for t, _ in SECTIONS)}</ol></div>"""]
+      <div class="t">Сопроводительная документация</div>
+      <div class="st">Цифровая платформа-агрегатор ИТ-вакансий с верифицированным профилем достижений участника
+      Федерации спортивного программирования (ФСП)</div>
+      <table class="meta">
+        <tr><td>Мероприятие</td><td>Хакатон «Лидеры цифровой трансформации 2026», спецтрек ФСП</td></tr>
+        <tr><td>Команда</td><td>«Дергачёв и жена»</td></tr>
+        <tr><td>Развёрнутый стенд</td><td>{DEMO_URL}</td></tr>
+        <tr><td>Исходный код</td><td>{REPO_URL}</td></tr>
+        <tr><td>Редакция документа</td><td>{dt.date.today():%d.%m.%Y}</td></tr>
+      </table></div>
+      <h1 class="plain">Содержание</h1><ol class="toc">{toc}</ol>
+      <h2>Соответствие требованиям к документации (ТЗ, п. 3.4)</h2>
+      <table><tr><th>Требование ТЗ</th><th style="width:34%">Раздел документа</th></tr>{tz}</table>
+      <p class="muted">Документ собирается из файлов каталога docs/ и спецификации docs/openapi.json скриптом
+      scripts/build_docs_pdf.py, поэтому его содержание совпадает с документацией в репозитории.</p>"""]
     for i, (title, path) in enumerate(SECTIONS):
         body = api_html() if path is None else md_to_html(path)
         parts.append(f'<h1 class="{"first" if False else ""}">{i + 1}. {html.escape(title)}</h1>{body}')
@@ -122,7 +158,7 @@ async def main():
         await pg.wait_for_timeout(1500)
         await pg.pdf(path=str(OUT), format="A4", print_background=True, display_header_footer=True,
                      header_template="<span></span>",
-                     footer_template='<div style="font-size:8px;width:100%;text-align:center;color:#6B6C72">шаурматч_ · документация · <span class="pageNumber"></span>/<span class="totalPages"></span></div>',
+                     footer_template='<div style="font-size:8px;width:100%;text-align:center;color:#6B6C72">шаурматч_, сопроводительная документация, стр. <span class="pageNumber"></span> из <span class="totalPages"></span></div>',
                      margin={"top": "16mm", "bottom": "16mm", "left": "14mm", "right": "14mm"})
         await b.close()
     tmp.unlink()
