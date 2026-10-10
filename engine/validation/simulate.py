@@ -258,7 +258,7 @@ def main(n: int = 2000, seed: int = 42):
     metrics["retest_agreement"] = round(float(np.mean(np.array(g1) == np.array(g2))), 3)
     metrics["retest_kappa_quadratic"] = round(cohen_kappa_quadratic(g1, g2, k), 3)
 
-    # 3) Дискриминативность шаблонов: точечно-бисериальная корреляция «верно ↔ истинный θ»
+    # 3) Дискриминативность шаблонов: точечно-бисериальная корреляция между верным ответом и истинным θ
     by_t = defaultdict(list)
     for tid, ok, th in item_rows:
         by_t[tid].append((ok, th))
@@ -445,7 +445,7 @@ def report(m: dict):
 | κ (квадратичная) тест-ретест | **{m['retest_kappa_quadratic']}** |
 
 ## 3. Дискриминативность заданий
-Средняя точечно-бисериальная корреляция «верно ↔ истинный уровень»: **{m['template_discrimination_mean']}**
+Средняя точечно-бисериальная корреляция между верным ответом и истинным уровнем: **{m['template_discrimination_mean']}**
 (ориентир психометрики: > 0.2 — приемлемо, > 0.3 — хорошо). Максимальная доля показов одного шаблона: {m['exposure_max_share']:.1%}.
 
 ## 4. Устойчивость к сливу
